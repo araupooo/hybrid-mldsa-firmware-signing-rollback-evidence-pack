@@ -1,0 +1,46 @@
+PASS bench run1 sizes OK (FIPS 204 Table 2 / RFC 8032) fresh
+PASS bench run1 sizes OK (FIPS 204 Table 2 / RFC 8032) shipped
+PASS bench run1 ML-DSA-44 verify failures 0 
+PASS bench run1 ML-DSA-44 keypair min within 25% and mean within 2x shipped mean=56.55 min=31.93 us; fresh mean=59.86 min=31.7 us
+PASS bench run1 ML-DSA-44 sign mean within 25% shipped=104.39 us fresh=123.27 us
+PASS bench run1 ML-DSA-44 verify mean within 25% shipped=36.27 us fresh=36.07 us
+PASS bench run1 ML-DSA-65 verify failures 0 
+PASS bench run1 ML-DSA-65 keypair min within 25% and mean within 2x shipped mean=58.8 min=56.49 us; fresh mean=58.36 min=56.2 us
+PASS bench run1 ML-DSA-65 sign mean within 25% shipped=171.49 us fresh=185.66 us
+PASS bench run1 ML-DSA-65 verify mean within 25% shipped=60.97 us fresh=58.78 us
+PASS bench run1 ML-DSA-87 verify failures 0 
+PASS bench run1 ML-DSA-87 keypair min within 25% and mean within 2x shipped mean=87.24 min=81.13 us; fresh mean=83.56 min=80.48 us
+PASS bench run1 ML-DSA-87 sign mean within 25% shipped=193.14 us fresh=189.39 us
+PASS bench run1 ML-DSA-87 verify mean within 25% shipped=87.8 us fresh=84.07 us
+PASS bench run1 Ed25519 verify failures 0 
+PASS bench run1 Ed25519 keypair min within 25% and mean within 2x shipped mean=57.32 min=53.84 us; fresh mean=56.23 min=53.97 us
+PASS bench run1 Ed25519 sign mean within 25% shipped=58.45 us fresh=54.06 us
+PASS bench run1 Ed25519 verify mean within 25% shipped=147.71 us fresh=154.85 us
+PASS bench run2 sizes OK (FIPS 204 Table 2 / RFC 8032) fresh
+PASS bench run2 sizes OK (FIPS 204 Table 2 / RFC 8032) shipped
+PASS bench run2 ML-DSA-44 verify failures 0 
+PASS bench run2 ML-DSA-44 keypair min within 25% and mean within 2x shipped mean=54.99 min=31.74 us; fresh mean=54.95 min=31.82 us
+PASS bench run2 ML-DSA-44 sign mean within 25% shipped=119.22 us fresh=111.48 us
+PASS bench run2 ML-DSA-44 verify mean within 25% shipped=36.36 us fresh=35.6 us
+PASS bench run2 ML-DSA-65 verify failures 0 
+PASS bench run2 ML-DSA-65 keypair min within 25% and mean within 2x shipped mean=58.8 min=56.15 us; fresh mean=58.86 min=56.25 us
+PASS bench run2 ML-DSA-65 sign mean within 25% shipped=163.63 us fresh=189.62 us
+PASS bench run2 ML-DSA-65 verify mean within 25% shipped=59.04 us fresh=59.23 us
+PASS bench run2 ML-DSA-87 verify failures 0 
+PASS bench run2 ML-DSA-87 keypair min within 25% and mean within 2x shipped mean=96.67 min=80.89 us; fresh mean=83.41 min=80.91 us
+PASS bench run2 ML-DSA-87 sign mean within 25% shipped=209.74 us fresh=196.15 us
+PASS bench run2 ML-DSA-87 verify mean within 25% shipped=96.71 us fresh=84.42 us
+PASS bench run2 Ed25519 verify failures 0 
+PASS bench run2 Ed25519 keypair min within 25% and mean within 2x shipped mean=58.77 min=53.83 us; fresh mean=55.45 min=54.18 us
+PASS bench run2 Ed25519 sign mean within 25% shipped=55.93 us fresh=53.89 us
+PASS bench run2 Ed25519 verify mean within 25% shipped=152.33 us fresh=142.98 us
+PASS scenarios run1 shipped 11/11 PASS 11/11
+PASS scenarios run1 fresh 11/11 PASS 11/11
+PASS scenarios run1 shipped expected==observed for all mismatches: []
+PASS scenarios run1 fresh expected==observed for all mismatches: []
+PASS scenarios run2 shipped 11/11 PASS 11/11
+PASS scenarios run2 fresh 11/11 PASS 11/11
+PASS scenarios run2 shipped expected==observed for all mismatches: []
+PASS scenarios run2 fresh expected==observed for all mismatches: []
+
+COMPARISON: ALL CHECKS PASSED
