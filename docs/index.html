@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Hybrid ML-DSA Firmware Signing and Rollback Assessment — Results</title>
+<style>body{font-family:system-ui,sans-serif;max-width:960px;margin:2em auto;padding:0 1em}table{border-collapse:collapse;margin:1em 0}th,td{border:1px solid #999;padding:.35em .6em;text-align:left}th{background:#eee}code{background:#f4f4f4;padding:0 .2em}</style>
+</head><body>
+<h1>Hybrid ML-DSA Firmware Signing and Rollback Assessment — Results</h1>
+<p>Every number below is copied verbatim from the unedited logs in <code>outputs/</code>. Sources: FIPS 204 Table 2 (ML-DSA sizes), RFC 8032 §1 (Ed25519 sizes). Method, limitations, and the claim-to-evidence map: <code>docs/methodology.md</code>, <code>docs/decision-memo.md</code>, <code>docs/evidence-index.md</code>.</p>
+<h2>1. Sizes vs the standards</h2>
+<table><tr><th>Scheme</th><th>Standard</th><th>Category</th><th>Secret key (B)</th><th>Public key (B)</th><th>Signature (B)</th><th>Run1</th><th>Run2</th></tr>
+<tr><td>ML-DSA-44</td><td>FIPS 204 Table 2</td><td>2</td><td>2560</td><td>1312</td><td>2420</td><td>OK</td><td>OK</td></tr>
+<tr><td>ML-DSA-65</td><td>FIPS 204 Table 2</td><td>3</td><td>4032</td><td>1952</td><td>3309</td><td>OK</td><td>OK</td></tr>
+<tr><td>ML-DSA-87</td><td>FIPS 204 Table 2</td><td>5</td><td>4896</td><td>2592</td><td>4627</td><td>OK</td><td>OK</td></tr>
+<tr><td>Ed25519</td><td>RFC 8032 §1</td><td>—</td><td>32</td><td>32</td><td>64</td><td>OK</td><td>OK</td></tr>
+</table>
+<p>Measured sizes (run1): ML-DSA-44: sk 2560, pk 1312, sig 2420; ML-DSA-65: sk 4032, pk 1952, sig 3309; ML-DSA-87: sk 4896, pk 2592, sig 4627; Ed25519: sk 32, pk 32, sig 64.</p>
+<h2>2. Timing, N=100, fixed 64-byte message (µs)</h2>
+<table><tr><th>Scheme</th><th>Op</th><th>Run1 mean</th><th>Run1 min</th><th>Run1 max</th><th>Run2 mean</th><th>Run2 min</th><th>Run2 max</th><th>Verify failures</th></tr>
+<tr><td>ML-DSA-44</td><td>keypair</td><td>56.55</td><td>31.93</td><td>2318.02</td><td>54.99</td><td>31.74</td><td>2128.63</td><td>—</td></tr>
+<tr><td>ML-DSA-44</td><td>sign</td><td>104.39</td><td>47.15</td><td>399.19</td><td>119.22</td><td>47.09</td><td>399.94</td><td>—</td></tr>
+<tr><td>ML-DSA-44</td><td>verify</td><td>36.27</td><td>34.97</td><td>49.05</td><td>36.36</td><td>35.07</td><td>55.33</td><td>0/100 (run1), 0/100 (run2)</td></tr>
+<tr><td>ML-DSA-65</td><td>keypair</td><td>58.80</td><td>56.49</td><td>82.42</td><td>58.80</td><td>56.15</td><td>124.23</td><td>—</td></tr>
+<tr><td>ML-DSA-65</td><td>sign</td><td>171.49</td><td>71.44</td><td>612.55</td><td>163.63</td><td>71.29</td><td>558.07</td><td>—</td></tr>
+<tr><td>ML-DSA-65</td><td>verify</td><td>60.97</td><td>58.45</td><td>108.10</td><td>59.04</td><td>57.19</td><td>79.81</td><td>0/100 (run1), 0/100 (run2)</td></tr>
+<tr><td>ML-DSA-87</td><td>keypair</td><td>87.24</td><td>81.13</td><td>122.37</td><td>96.67</td><td>80.89</td><td>221.79</td><td>—</td></tr>
+<tr><td>ML-DSA-87</td><td>sign</td><td>193.14</td><td>100.65</td><td>912.63</td><td>209.74</td><td>101.65</td><td>667.52</td><td>—</td></tr>
+<tr><td>ML-DSA-87</td><td>verify</td><td>87.80</td><td>82.02</td><td>128.49</td><td>96.71</td><td>82.09</td><td>410.29</td><td>0/100 (run1), 0/100 (run2)</td></tr>
+<tr><td>Ed25519</td><td>keypair</td><td>57.32</td><td>53.84</td><td>97.98</td><td>58.77</td><td>53.83</td><td>115.90</td><td>—</td></tr>
+<tr><td>Ed25519</td><td>sign</td><td>58.45</td><td>52.53</td><td>331.44</td><td>55.93</td><td>52.20</td><td>94.16</td><td>—</td></tr>
+<tr><td>Ed25519</td><td>verify</td><td>147.71</td><td>135.15</td><td>238.46</td><td>152.33</td><td>138.05</td><td>246.50</td><td>0/100 (run1), 0/100 (run2)</td></tr>
+</table>
+<p>Full logs: <code>outputs/bench-sig-run1.log</code>, <code>outputs/bench-sig-run2.log</code>.</p>
+<h2>3. Scenarios (expected vs observed)</h2>
+<table><tr><th>ID</th><th>Name</th><th>Expected</th><th>Run1 observed</th><th>Run2 observed</th><th>Run1</th><th>Run2</th></tr>
+<tr><td>S1</td><td>clean-install-v2</td><td>ACCEPT</td><td>ACCEPT</td><td>ACCEPT</td><td>PASS</td><td>PASS</td></tr>
+<tr><td>S2</td><td>rollback-v1-after-v2</td><td>REJECT</td><td>REJECT</td><td>REJECT</td><td>PASS</td><td>PASS</td></tr>
+<tr><td>S3</td><td>tampered-version-counter-99</td><td>REJECT</td><td>REJECT</td><td>REJECT</td><td>PASS</td><td>PASS</td></tr>
+<tr><td>S4</td><td>tampered-payload-byteflip</td><td>REJECT</td><td>REJECT</td><td>REJECT</td><td>PASS</td><td>PASS</td></tr>
+<tr><td>S5</td><td>wrong-classical-public-key</td><td>REJECT</td><td>REJECT</td><td>REJECT</td><td>PASS</td><td>PASS</td></tr>
+<tr><td>S6</td><td>truncated-mldsa-signature</td><td>REJECT</td><td>REJECT</td><td>REJECT</td><td>PASS</td><td>PASS</td></tr>
+<tr><td>S7</td><td>truncated-ed25519-signature</td><td>REJECT</td><td>REJECT</td><td>REJECT</td><td>PASS</td><td>PASS</td></tr>
+<tr><td>S8</td><td>revoked-pq-key-v2</td><td>REJECT</td><td>REJECT</td><td>REJECT</td><td>PASS</td><td>PASS</td></tr>
+<tr><td>S9</td><td>rotated-keys-install-v3</td><td>ACCEPT</td><td>ACCEPT</td><td>ACCEPT</td><td>PASS</td><td>PASS</td></tr>
+<tr><td>S10</td><td>old-artifact-revoked-key-after-rotation</td><td>REJECT</td><td>REJECT</td><td>REJECT</td><td>PASS</td><td>PASS</td></tr>
+<tr><td>S10b</td><td>old-artifact-revocation-gate</td><td>REJECT</td><td>REJECT</td><td>REJECT</td><td>PASS</td><td>PASS</td></tr>
+</table>
+<p>Run1: 11/11 PASS; run2: 11/11 PASS. Rejection reasons are in <code>outputs/run1-scenarios.csv</code> and <code>outputs/run2-scenarios.csv</code>; full console logs: <code>outputs/scenarios-run1.log</code>, <code>outputs/scenarios-run2.log</code>.</p>
+<h2>4. Clean reproduction</h2>
+<p><code>outputs/fresh-clone-compare.txt</code>: COMPARISON: ALL CHECKS PASSED</p>
+<p>Reproduce everything: <code>bash scripts/build_all.sh && bash scripts/run_all.sh && bash scripts/clean_reproduce.sh</code>. Verify file integrity: <code>bash scripts/verify_digests.sh</code>.</p>
+</body></html>
