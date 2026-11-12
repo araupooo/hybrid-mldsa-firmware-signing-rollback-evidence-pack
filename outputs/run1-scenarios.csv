@@ -1,0 +1,12 @@
+scenario,name,expected,observed,reason,result
+S1,clean-install-v2,ACCEPT,ACCEPT,"artifact digest, monotonic version, revocation, lengths, and both signatures valid",PASS
+S2,rollback-v1-after-v2,REJECT,REJECT,rollback: manifest version 1 <= installed version 2,PASS
+S3,tampered-version-counter-99,REJECT,REJECT,classical signature verification failed,PASS
+S4,tampered-payload-byteflip,REJECT,REJECT,artifact digest or size mismatch (tampered payload),PASS
+S5,wrong-classical-public-key,REJECT,REJECT,classical signature verification failed,PASS
+S6,truncated-mldsa-signature,REJECT,REJECT,length check failed (FIPS 204 §3.6.2): key or signature length does not match scheme,PASS
+S7,truncated-ed25519-signature,REJECT,REJECT,length check failed (FIPS 204 §3.6.2): key or signature length does not match scheme,PASS
+S8,revoked-pq-key-v2,REJECT,REJECT,compromised key: pq key mldsa65-rel-a is revoked,PASS
+S9,rotated-keys-install-v3,ACCEPT,ACCEPT,"artifact digest, monotonic version, revocation, lengths, and both signatures valid",PASS
+S10,old-artifact-revoked-key-after-rotation,REJECT,REJECT,rollback: manifest version 2 <= installed version 3,PASS
+S10b,old-artifact-revocation-gate,REJECT,REJECT,compromised key: pq key mldsa65-rel-a is revoked,PASS
