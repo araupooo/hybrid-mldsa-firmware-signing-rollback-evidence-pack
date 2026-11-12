@@ -1,0 +1,2 @@
+# revocation list: one key id per line
+mldsa65-rel-a

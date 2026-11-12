@@ -1,0 +1,205 @@
+run_scenarios: label=fresh-clone-run2 release=/tmp/mldsa-sign-repro.0xje3J/release work=/tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2 out=./pack/outputs
+run_scenarios: check order in verify: digest -> version -> revocation -> lengths -> signatures
+artifacts: v1=/tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/firmware-v1.bin v2=/tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/firmware-v2.bin v3=/tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/firmware-v3.bin (64 KiB deterministic patterns)
+$ /tmp/mldsa-sign-repro.0xje3J/release genkey Ed25519 ed25519-rel-a /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+genkey: scheme=Ed25519 key_id=ed25519-rel-a pk_len=32 sk_len=32 pk_sha256=369514530f24747b...
+genkey: wrote /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys/ed25519-rel-a.pk (32 bytes) and /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys/ed25519-rel-a.sk (32 bytes) — runtime keys, not for commit
+[exit 0]
+$ /tmp/mldsa-sign-repro.0xje3J/release genkey ML-DSA-65 mldsa65-rel-a /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+genkey: scheme=ML-DSA-65 key_id=mldsa65-rel-a pk_len=1952 sk_len=4032 pk_sha256=0eca930944e22173...
+genkey: wrote /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys/mldsa65-rel-a.pk (1952 bytes) and /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys/mldsa65-rel-a.sk (4032 bytes) — runtime keys, not for commit
+[exit 0]
+$ /tmp/mldsa-sign-repro.0xje3J/release genkey Ed25519 ed25519-rel-b /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+genkey: scheme=Ed25519 key_id=ed25519-rel-b pk_len=32 sk_len=32 pk_sha256=3d4399d0aff94758...
+genkey: wrote /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys/ed25519-rel-b.pk (32 bytes) and /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys/ed25519-rel-b.sk (32 bytes) — runtime keys, not for commit
+[exit 0]
+$ /tmp/mldsa-sign-repro.0xje3J/release genkey ML-DSA-65 mldsa65-rel-b /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+genkey: scheme=ML-DSA-65 key_id=mldsa65-rel-b pk_len=1952 sk_len=4032 pk_sha256=087dba3bbaa70441...
+genkey: wrote /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys/mldsa65-rel-b.pk (1952 bytes) and /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys/mldsa65-rel-b.sk (4032 bytes) — runtime keys, not for commit
+[exit 0]
+$ /tmp/mldsa-sign-repro.0xje3J/release genkey Ed25519 ed25519-rel-c /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+genkey: scheme=Ed25519 key_id=ed25519-rel-c pk_len=32 sk_len=32 pk_sha256=1c702248fddd1284...
+genkey: wrote /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys/ed25519-rel-c.pk (32 bytes) and /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys/ed25519-rel-c.sk (32 bytes) — runtime keys, not for commit
+[exit 0]
+$ /tmp/mldsa-sign-repro.0xje3J/release sign /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/firmware-v1.bin 1 ed25519-rel-a /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys ML-DSA-65 mldsa65-rel-a /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v1.json
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+sign: artifact=firmware-v1.bin sha256=0639894dc09841799245c64d7cb3c4c2241ce6ed4927b026c8b2426d759a0a9c size=65536 version=1
+sign: classical Ed25519 key_id=ed25519-rel-a sig_len=64
+sign: pq ML-DSA-65 key_id=mldsa65-rel-a sig_len=3309
+sign: wrote manifest /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v1.json
+[exit 0]
+$ /tmp/mldsa-sign-repro.0xje3J/release sign /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/firmware-v2.bin 2 ed25519-rel-a /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys ML-DSA-65 mldsa65-rel-a /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2.json
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+sign: artifact=firmware-v2.bin sha256=4217a0a5d0e681020c4790e56a0aa88066331e850a98ed64cda204668db14edb size=65536 version=2
+sign: classical Ed25519 key_id=ed25519-rel-a sig_len=64
+sign: pq ML-DSA-65 key_id=mldsa65-rel-a sig_len=3309
+sign: wrote manifest /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2.json
+[exit 0]
+$ /tmp/mldsa-sign-repro.0xje3J/release verify /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2.json /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/firmware-v2.bin /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/state.txt /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/revocation.txt
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+verify: manifest=/tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2.json artifact=firmware-v2.bin version=2 classical=Ed25519 key=ed25519-rel-a pq=ML-DSA-65 key=mldsa65-rel-a
+verify: artifact sha256=4217a0a5d0e681020c4790e56a0aa88066331e850a98ed64cda204668db14edb (manifest 4217a0a5d0e681020c4790e56a0aa88066331e850a98ed64cda204668db14edb) size=65536 (manifest 65536)
+verify: artifact digest: OK
+verify: installed version=0 manifest version=2
+verify: monotonic version: OK
+verify: revocation check: OK (neither key revoked)
+verify: lengths classical pk=32 (exp 32) sig=64 (exp 64); pq pk=1952 (exp 1952) sig=3309 (exp 3309)
+verify: length checks: OK
+verify: classical Ed25519 signature: VALID
+verify: pq ML-DSA-65 signature: VALID
+verify: installed version updated to 2
+VERDICT: ACCEPT
+REASON: artifact digest, monotonic version, revocation, lengths, and both signatures valid
+[exit 0]
+SCENARIO S1 clean-install-v2 EXPECTED=ACCEPT OBSERVED=ACCEPT REASON=artifact digest, monotonic version, revocation, lengths, and both signatures valid RESULT=PASS
+$ /tmp/mldsa-sign-repro.0xje3J/release verify /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v1.json /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/firmware-v1.bin /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/state.txt /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/revocation.txt
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+verify: manifest=/tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v1.json artifact=firmware-v1.bin version=1 classical=Ed25519 key=ed25519-rel-a pq=ML-DSA-65 key=mldsa65-rel-a
+verify: artifact sha256=0639894dc09841799245c64d7cb3c4c2241ce6ed4927b026c8b2426d759a0a9c (manifest 0639894dc09841799245c64d7cb3c4c2241ce6ed4927b026c8b2426d759a0a9c) size=65536 (manifest 65536)
+verify: artifact digest: OK
+verify: installed version=2 manifest version=1
+VERDICT: REJECT
+REASON: rollback: manifest version 1 <= installed version 2
+[exit 1]
+SCENARIO S2 rollback-v1-after-v2 EXPECTED=REJECT OBSERVED=REJECT REASON=rollback: manifest version 1 <= installed version 2 RESULT=PASS
+$ /tmp/mldsa-sign-repro.0xje3J/release verify /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2-version99.json /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/firmware-v2.bin /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/state.txt /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/revocation.txt
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+verify: manifest=/tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2-version99.json artifact=firmware-v2.bin version=99 classical=Ed25519 key=ed25519-rel-a pq=ML-DSA-65 key=mldsa65-rel-a
+verify: artifact sha256=4217a0a5d0e681020c4790e56a0aa88066331e850a98ed64cda204668db14edb (manifest 4217a0a5d0e681020c4790e56a0aa88066331e850a98ed64cda204668db14edb) size=65536 (manifest 65536)
+verify: artifact digest: OK
+verify: installed version=2 manifest version=99
+verify: monotonic version: OK
+verify: revocation check: OK (neither key revoked)
+verify: lengths classical pk=32 (exp 32) sig=64 (exp 64); pq pk=1952 (exp 1952) sig=3309 (exp 3309)
+verify: length checks: OK
+verify: classical Ed25519 signature: INVALID
+verify: pq ML-DSA-65 signature: INVALID
+VERDICT: REJECT
+REASON: classical signature verification failed
+[exit 1]
+SCENARIO S3 tampered-version-counter-99 EXPECTED=REJECT OBSERVED=REJECT REASON=classical signature verification failed RESULT=PASS
+$ /tmp/mldsa-sign-repro.0xje3J/release verify /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2.json /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/firmware-v2-tampered.bin /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/state.txt /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/revocation.txt
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+verify: manifest=/tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2.json artifact=firmware-v2.bin version=2 classical=Ed25519 key=ed25519-rel-a pq=ML-DSA-65 key=mldsa65-rel-a
+verify: artifact sha256=18bc89c3e86c916fc17e66a6cda942669c49e65b1e822fe264fb19c06acd8b55 (manifest 4217a0a5d0e681020c4790e56a0aa88066331e850a98ed64cda204668db14edb) size=65536 (manifest 65536)
+VERDICT: REJECT
+REASON: artifact digest or size mismatch (tampered payload)
+[exit 1]
+SCENARIO S4 tampered-payload-byteflip EXPECTED=REJECT OBSERVED=REJECT REASON=artifact digest or size mismatch (tampered payload) RESULT=PASS
+S5-S7: state reset to version=1 to isolate the signature checks from the rollback check
+$ /tmp/mldsa-sign-repro.0xje3J/release verify /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2-wrongkey.json /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/firmware-v2.bin /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/state.txt /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/revocation.txt
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+verify: manifest=/tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2-wrongkey.json artifact=firmware-v2.bin version=2 classical=Ed25519 key=ed25519-rel-a pq=ML-DSA-65 key=mldsa65-rel-a
+verify: artifact sha256=4217a0a5d0e681020c4790e56a0aa88066331e850a98ed64cda204668db14edb (manifest 4217a0a5d0e681020c4790e56a0aa88066331e850a98ed64cda204668db14edb) size=65536 (manifest 65536)
+verify: artifact digest: OK
+verify: installed version=1 manifest version=2
+verify: monotonic version: OK
+verify: revocation check: OK (neither key revoked)
+verify: lengths classical pk=32 (exp 32) sig=64 (exp 64); pq pk=1952 (exp 1952) sig=3309 (exp 3309)
+verify: length checks: OK
+verify: classical Ed25519 signature: INVALID
+verify: pq ML-DSA-65 signature: VALID
+VERDICT: REJECT
+REASON: classical signature verification failed
+[exit 1]
+SCENARIO S5 wrong-classical-public-key EXPECTED=REJECT OBSERVED=REJECT REASON=classical signature verification failed RESULT=PASS
+$ /tmp/mldsa-sign-repro.0xje3J/release verify /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2-trunc-pq.json /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/firmware-v2.bin /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/state.txt /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/revocation.txt
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+verify: manifest=/tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2-trunc-pq.json artifact=firmware-v2.bin version=2 classical=Ed25519 key=ed25519-rel-a pq=ML-DSA-65 key=mldsa65-rel-a
+verify: artifact sha256=4217a0a5d0e681020c4790e56a0aa88066331e850a98ed64cda204668db14edb (manifest 4217a0a5d0e681020c4790e56a0aa88066331e850a98ed64cda204668db14edb) size=65536 (manifest 65536)
+verify: artifact digest: OK
+verify: installed version=1 manifest version=2
+verify: monotonic version: OK
+verify: revocation check: OK (neither key revoked)
+verify: lengths classical pk=32 (exp 32) sig=64 (exp 64); pq pk=1952 (exp 1952) sig=3308 (exp 3309)
+VERDICT: REJECT
+REASON: length check failed (FIPS 204 §3.6.2): key or signature length does not match scheme
+[exit 1]
+SCENARIO S6 truncated-mldsa-signature EXPECTED=REJECT OBSERVED=REJECT REASON=length check failed (FIPS 204 §3.6.2): key or signature length does not match scheme RESULT=PASS
+$ /tmp/mldsa-sign-repro.0xje3J/release verify /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2-trunc-ed.json /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/firmware-v2.bin /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/state.txt /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/revocation.txt
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+verify: manifest=/tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2-trunc-ed.json artifact=firmware-v2.bin version=2 classical=Ed25519 key=ed25519-rel-a pq=ML-DSA-65 key=mldsa65-rel-a
+verify: artifact sha256=4217a0a5d0e681020c4790e56a0aa88066331e850a98ed64cda204668db14edb (manifest 4217a0a5d0e681020c4790e56a0aa88066331e850a98ed64cda204668db14edb) size=65536 (manifest 65536)
+verify: artifact digest: OK
+verify: installed version=1 manifest version=2
+verify: monotonic version: OK
+verify: revocation check: OK (neither key revoked)
+verify: lengths classical pk=32 (exp 32) sig=63 (exp 64); pq pk=1952 (exp 1952) sig=3309 (exp 3309)
+VERDICT: REJECT
+REASON: length check failed (FIPS 204 §3.6.2): key or signature length does not match scheme
+[exit 1]
+SCENARIO S7 truncated-ed25519-signature EXPECTED=REJECT OBSERVED=REJECT REASON=length check failed (FIPS 204 §3.6.2): key or signature length does not match scheme RESULT=PASS
+S8: state reset to version=1 to isolate the revocation check from the rollback check
+$ /tmp/mldsa-sign-repro.0xje3J/release verify /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2.json /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/firmware-v2.bin /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/state.txt /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/revocation.txt
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+verify: manifest=/tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2.json artifact=firmware-v2.bin version=2 classical=Ed25519 key=ed25519-rel-a pq=ML-DSA-65 key=mldsa65-rel-a
+verify: artifact sha256=4217a0a5d0e681020c4790e56a0aa88066331e850a98ed64cda204668db14edb (manifest 4217a0a5d0e681020c4790e56a0aa88066331e850a98ed64cda204668db14edb) size=65536 (manifest 65536)
+verify: artifact digest: OK
+verify: installed version=1 manifest version=2
+verify: monotonic version: OK
+VERDICT: REJECT
+REASON: compromised key: pq key mldsa65-rel-a is revoked
+[exit 1]
+SCENARIO S8 revoked-pq-key-v2 EXPECTED=REJECT OBSERVED=REJECT REASON=compromised key: pq key mldsa65-rel-a is revoked RESULT=PASS
+$ /tmp/mldsa-sign-repro.0xje3J/release sign /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/firmware-v3.bin 3 ed25519-rel-b /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys ML-DSA-65 mldsa65-rel-b /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/keys /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v3.json
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+sign: artifact=firmware-v3.bin sha256=c02970e414a25393df8d3af40e5fae7edbdb2667d22f32a24ee54ca33ffd07a3 size=65536 version=3
+sign: classical Ed25519 key_id=ed25519-rel-b sig_len=64
+sign: pq ML-DSA-65 key_id=mldsa65-rel-b sig_len=3309
+sign: wrote manifest /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v3.json
+[exit 0]
+$ /tmp/mldsa-sign-repro.0xje3J/release verify /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v3.json /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/firmware-v3.bin /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/state.txt /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/revocation.txt
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+verify: manifest=/tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v3.json artifact=firmware-v3.bin version=3 classical=Ed25519 key=ed25519-rel-b pq=ML-DSA-65 key=mldsa65-rel-b
+verify: artifact sha256=c02970e414a25393df8d3af40e5fae7edbdb2667d22f32a24ee54ca33ffd07a3 (manifest c02970e414a25393df8d3af40e5fae7edbdb2667d22f32a24ee54ca33ffd07a3) size=65536 (manifest 65536)
+verify: artifact digest: OK
+verify: installed version=1 manifest version=3
+verify: monotonic version: OK
+verify: revocation check: OK (neither key revoked)
+verify: lengths classical pk=32 (exp 32) sig=64 (exp 64); pq pk=1952 (exp 1952) sig=3309 (exp 3309)
+verify: length checks: OK
+verify: classical Ed25519 signature: VALID
+verify: pq ML-DSA-65 signature: VALID
+verify: installed version updated to 3
+VERDICT: ACCEPT
+REASON: artifact digest, monotonic version, revocation, lengths, and both signatures valid
+[exit 0]
+SCENARIO S9 rotated-keys-install-v3 EXPECTED=ACCEPT OBSERVED=ACCEPT REASON=artifact digest, monotonic version, revocation, lengths, and both signatures valid RESULT=PASS
+$ /tmp/mldsa-sign-repro.0xje3J/release verify /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2.json /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/firmware-v2.bin /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/state.txt /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/revocation.txt
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+verify: manifest=/tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2.json artifact=firmware-v2.bin version=2 classical=Ed25519 key=ed25519-rel-a pq=ML-DSA-65 key=mldsa65-rel-a
+verify: artifact sha256=4217a0a5d0e681020c4790e56a0aa88066331e850a98ed64cda204668db14edb (manifest 4217a0a5d0e681020c4790e56a0aa88066331e850a98ed64cda204668db14edb) size=65536 (manifest 65536)
+verify: artifact digest: OK
+verify: installed version=3 manifest version=2
+VERDICT: REJECT
+REASON: rollback: manifest version 2 <= installed version 3
+[exit 1]
+SCENARIO S10 old-artifact-revoked-key-after-rotation EXPECTED=REJECT OBSERVED=REJECT REASON=rollback: manifest version 2 <= installed version 3 RESULT=PASS
+S10b: separate state file at version=1 to isolate the revocation check from the rollback check
+$ /tmp/mldsa-sign-repro.0xje3J/release verify /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2.json /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/firmware-v2.bin /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/state-s10b.txt /tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/revocation.txt
+release: liboqs 0.16.0, OpenSSL OpenSSL 3.0.13 30 Jan 2024
+verify: manifest=/tmp/mldsa-sign-repro.0xje3J/scenarios-fresh-clone-run2/manifest-v2.json artifact=firmware-v2.bin version=2 classical=Ed25519 key=ed25519-rel-a pq=ML-DSA-65 key=mldsa65-rel-a
+verify: artifact sha256=4217a0a5d0e681020c4790e56a0aa88066331e850a98ed64cda204668db14edb (manifest 4217a0a5d0e681020c4790e56a0aa88066331e850a98ed64cda204668db14edb) size=65536 (manifest 65536)
+verify: artifact digest: OK
+verify: installed version=1 manifest version=2
+verify: monotonic version: OK
+VERDICT: REJECT
+REASON: compromised key: pq key mldsa65-rel-a is revoked
+[exit 1]
+SCENARIO S10b old-artifact-revocation-gate EXPECTED=REJECT OBSERVED=REJECT REASON=compromised key: pq key mldsa65-rel-a is revoked RESULT=PASS
+shipped: fresh-clone-run2-firmware-v1.bin
+shipped: fresh-clone-run2-firmware-v2.bin
+shipped: fresh-clone-run2-firmware-v3.bin
+shipped: fresh-clone-run2-manifest-v1.json
+shipped: fresh-clone-run2-manifest-v2.json
+shipped: fresh-clone-run2-manifest-v3.json
+shipped: fresh-clone-run2-revocation-final.txt
+shipped: fresh-clone-run2-state-final.txt
+scenarios csv: ./pack/outputs/fresh-clone-run2-scenarios.csv
+run_scenarios: 11/11 scenarios PASS
+run_scenarios: DONE
